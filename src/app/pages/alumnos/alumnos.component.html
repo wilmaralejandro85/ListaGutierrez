@@ -1,0 +1,33 @@
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Nota 1</th>
+        <th scope="col">Nota 2</th>
+        <th scope="col">Nota 3</th>
+        <th scope="col">Promedio</th>
+        <th scope="col">Aprobo/Reprobo</th>
+      </tr>
+    </thead>
+    @if(alumnos.length==0){ 
+        No hay alumnos para mostrar
+      } @else { 
+        <tbody>
+            @for (alumno of alumnos; track $index){     
+             <tr [ngClass]="((alumno.nota1+alumno.nota2+alumno.nota3)/3)>=3 ? 'aprobo' : 'reprobo'">              
+                   <th scope="row">{{$index + 1}}</th>
+                   <td>{{alumno.nombre | uppercase}}</td>
+                   <td>{{alumno.nota1 | number: '1.1-1'}}</td>
+                   <td>{{alumno.nota2 | number: '1.1-1'}}</td>
+                   <td>{{alumno.nota3 | number: '1.1-1'}}</td>
+                   <td>{{(alumno.nota1+alumno.nota2+alumno.nota3)/3 | number: '1.1-1'}}</td>                              
+                    @if(((alumno.nota1+alumno.nota2+alumno.nota3)/3)>=3){<td><img src="./assets/aprobado.png" width="40" height="40" /></td>}
+                    @else { <td><img src="./assets/rechazado.png" width="40" height="40"/></td> }                            
+             </tr>
+            } 
+            
+           </tbody>
+      }
+   
+  </table>
